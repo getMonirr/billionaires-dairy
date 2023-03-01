@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billionaires diary</title>
+    <!-- tailwind and daisyUI css -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0 150px;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+
+        }
+        .pName{
+            text-shadow: 6px 9px 8px rgba(21,50,206,0.7); 
+        }
+    </style>
+</head>
+
+<body class="container mx-auto">
+    <section class="grid grid-cols-3">
+        <header class="bg-slate-800 flex flex-col items-center p-4 py-10">
+            <div>
+                <img src="./images/logo/logo.svg" alt="logo">
+            </div>
+            <div class="mt-8 space-y-2 w-full">
+                <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
+                    <p class="text-base font-bold -mb-2">Add a user</p>
+                    <small class="text-center">(randomly)</small>
+                </div>
+                <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-2">
+                    <p class="text-base font-bold">Double Money</p>
+                </div>
+                <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
+                    <p class="text-base font-bold -mb-2">Sort By Bank</p>
+                    <small class="text-center">(Descending)</small>
+                </div>
+                <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-2">
+                    <p class="text-base font-bold">Calculate Entire Wealth</p>
+                </div>
+            </div>
+            <div class="mt-8 space-y-2 w-full">
+                <div id="show-billionaires"
+                    class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
+                    <p class="text-base font-bold">Show All Billionaires</p>
+                </div>
+                <div id="by-industry"
+                    class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
+                    <p class="text-base font-bold -mb-2">Richest by industry</p>
+                    <small class="text-center">(Technology)</small>
+                </div>
+                <div id="by-states"
+                    class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
+                    <p class="text-base font-bold -mb-2">Richest by states</p>
+                    <small class="text-center">(Texas)</small>
+                </div>
+            </div>
+        </header>
+        <main class="col-span-2 bg-gray-300">
+            <div class="flex justify-between px-8 py-4 bg-white">
+                <input class="form-control wi-full bg-white border-b-2 p-1 outline-none" placeholder="Search"
+                    type="text" name="search" id="search">
+                <img src="./images/logo/logo1.svg" alt="">
+            </div>
+            <div class="bg-gray-300 px-8 py-4">
+                <h1 class="font-bold text-black text-lg">Hello User!</h1>
+                <div>
+                    <div class="overflow-x-auto">
+
+                        <table class="text-bold text-black text-lg">
+                            <!-- head -->
+                            <thead>
+                                <tr class="border-b-2 border-black">
+                                    <th>Person</th>
+                                    <th>Citizenship</th>
+                                    <th>Industry</th>
+                                    <th>Rank</th>
+                                    <th>Wealth</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tBody" class="my-8">
+                                <!-- row goes here -->
+                                <tr>
+                                    <td>Click a button in the left container and see the result</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="border-t-2 border-black">
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>$6546465</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="w-1/2 mx-auto">
+                            <button id="loading" type="button"
+                                class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed mx-auto hidden"
+                                disabled="">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                                Processing...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+    <!-- billionaires js  -->
+    <script src="./js/billionaires.js"></script>
+</body>
+
+</html>

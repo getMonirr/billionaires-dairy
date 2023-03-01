@@ -1,12 +1,12 @@
 const tBody = document.getElementById('tBody');
-
+// handle loading scence
 const showLoading = (isLoading) => {
     const loadingElement = document.getElementById('loading');
     isLoading
         ? loadingElement.classList.remove('hidden')
         : loadingElement.classList.add('hidden')
 }
-
+// get billionaires data
 const getBillionairesData = async () => {
     try {
         const res = await fetch(`https://forbes400.onrender.com/api/forbes400?limit=10`);
@@ -16,7 +16,7 @@ const getBillionairesData = async () => {
         console.log(e);
     }
 }
-
+// set billionaires
 const setBillionairesData = async () => {
     tBody.innerHTML = '';
     showLoading(true);
@@ -25,21 +25,10 @@ const setBillionairesData = async () => {
         showBillionairesUI(user)
     })
 }
+// handle modal
+const handleModal = (user) => {
 
-const showBillionairesUI = async (user) => {
-    const { personName, countryOfCitizenship, industries, rank, finalWorth, uri } = user;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-        <td class="flex justify-between items-end gap-2">${personName}<a href="#${uri}"><img id="show-details"
-        class="cursor-pointer" src="./images/icons/eye.svg" alt=""></a></td>
-        <td>${countryOfCitizenship}</td>
-        <td>${industries ? industries[0] : "not found"}</td>
-        <td>${rank}</td>
-        <td>$ ${finalWorth}</td>
-        `;
-    // modal start
-    const { bios, squareImage, source, state, city, birthDate, gender, financialAssets } = user;
+    const { uri, personName, bios, squareImage, source, state, city, birthDate, gender, financialAssets, countryOfCitizenship } = user;
     const modalInBody = document.createElement('div');
     modalInBody.innerHTML = `
         <div class="modal" id="${uri}">
@@ -90,10 +79,47 @@ const showBillionairesUI = async (user) => {
         </div>
         `
     document.body.appendChild(modalInBody);
+}
+// handle UI
+const showBillionairesUI = async (user) => {
+    const { personName, countryOfCitizenship, industries, rank, finalWorth, uri } = user;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td class="flex justify-between items-end gap-2">${personName}<a href="#${uri}"><img id="show-details"
+        class="cursor-pointer" src="./images/icons/eye.svg" alt=""></a></td>
+        <td>${countryOfCitizenship}</td>
+        <td>${industries ? industries[0] : "not found"}</td>
+        <td id="rank" data-sort-value="${rank}">${rank}</td>
+        <td>$ <span id="wealth">${finalWorth}</span></td>
+        `;
+    // modal start
+    handleModal(user);
     // modal end
     tBody.appendChild(tr);
     showLoading(false);
 }
+
+// sorting 
+let isDescending = false; // keep track of current sorting order
+
+document.getElementById('rank-header')
+    .addEventListener('click', () => {
+
+        const rows = Array.from(tBody.querySelectorAll('tr'));
+
+        rows.sort((a, b) => {
+            const aValue = parseInt(a.querySelector(`[data-sort-value]`).dataset.sortValue);
+            const bValue = parseInt(b.querySelector(`[data-sort-value]`).dataset.sortValue);
+
+            return isDescending ? (bValue - aValue) : (aValue - bValue);
+        });
+
+        rows.forEach((row) => tBody.appendChild(row));
+
+        isDescending = !isDescending; // toggle sorting order
+    });
+
 
 
 
@@ -126,5 +152,12 @@ document.getElementById('by-states').addEventListener('click', async () => {
     })
 })
 
-// show details 
-
+// calculate wealth 
+document.getElementById('calculate-wealth')
+    .addEventListener('click', () => {
+        const totalWealth = [...document.querySelectorAll('#wealth')]
+            .map(w => parseFloat(w.innerText))
+            .reduce((acc, cur) => acc + cur, 0);
+        // console.log(totalWealth);
+        document.getElementById('total').innerText = totalWealth.toFixed(3);
+    })

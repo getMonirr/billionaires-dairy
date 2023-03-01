@@ -22,8 +22,9 @@
             text-align: left;
 
         }
-        .pName{
-            text-shadow: 6px 9px 8px rgba(21,50,206,0.7); 
+
+        .pName {
+            text-shadow: 6px 9px 8px rgba(21, 50, 206, 0.7);
         }
     </style>
 </head>
@@ -42,11 +43,13 @@
                 <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-2">
                     <p class="text-base font-bold">Double Money</p>
                 </div>
-                <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
+                <div id="rank-header"
+                    class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-1">
                     <p class="text-base font-bold -mb-2">Sort By Bank</p>
                     <small class="text-center">(Descending)</small>
                 </div>
-                <div class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-2">
+                <div id="calculate-wealth"
+                    class="cursor-pointer bg-white rounded-none text-black font-bold text-sm text-center py-2">
                     <p class="text-base font-bold">Calculate Entire Wealth</p>
                 </div>
             </div>
@@ -85,7 +88,7 @@
                                     <th>Person</th>
                                     <th>Citizenship</th>
                                     <th>Industry</th>
-                                    <th>Rank</th>
+                                    <th class="sortable">Rank</th>
                                     <th>Wealth</th>
                                 </tr>
                             </thead>
@@ -101,7 +104,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th>$6546465</th>
+                                    <th>$ <span id="total"></span></th>
                                 </tr>
                             </tfoot>
                         </table>
